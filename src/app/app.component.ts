@@ -22,7 +22,7 @@ import { CommonModule } from '@angular/common';
               </div>
             </div>
           </div>
-          <h1>Kefah Ndirangu Wangui Portfolio</h1>
+          <h1>{{title}}</h1>
         </div>
       </header>
       <nav class="taskbar">
@@ -36,7 +36,6 @@ import { CommonModule } from '@angular/common';
           <button routerLink="/resume" aria-label="Resume">
             <i class="fas fa-file-alt"></i> Resume
           </button>
-
           <button routerLink="/contact" aria-label="Contact">
             <i class="fas fa-envelope"></i> Contact
           </button>
@@ -237,4 +236,6 @@ import { CommonModule } from '@angular/common';
     }
   `]
 })
-export class AppComponent {}
+export class AppComponent {
+  title = 'Kefah Ndirangu Wangui Portfolio';
+}
