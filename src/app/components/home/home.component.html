@@ -1,0 +1,236 @@
+<div class="homepage-container">
+  <!-- Background Particles -->
+  <div class="particles-background">
+    <div 
+      *ngFor="let particle of particleArray; trackBy: trackByIndex"
+      class="particle" 
+      [style.left]="particle.left"
+      [style.animation-delay]="particle.animationDelay"
+      [style.animation-duration]="particle.animationDuration">
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-container">
+      <div class="hero-content">
+        <!-- Profile Showcase -->
+        <div class="profile-showcase">
+          <div class="profile-ring-outer">
+            <div class="profile-ring-inner">
+              <div class="profile-image">
+                <div class="profile-glow"></div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Tech Orbit -->
+          <div class="tech-orbit">
+            <div class="tech-icon tech-angular">🅰️</div>
+            <div class="tech-icon tech-ts">🔷</div>
+            <div class="tech-icon tech-node">🟢</div>
+            <div class="tech-icon tech-db">🗄️</div>
+            <div class="tech-icon tech-ai">🤖</div>
+          </div>
+        </div>
+
+        <!-- Enhanced Profile Image Section -->
+
+
+        <!-- Hero Text Content -->
+        <div class="hero-text">
+          <div class="intro-sequence">
+            <div class="intro-line">
+              <span class="greeting">{{ currentGreeting }}</span>
+            </div>
+            
+            <h1 class="hero-title">
+              <span class="title-line-1">I'm <span class="highlight-text">Kefah Ndirangu </span></span>
+              <span class="title-line-2"><span class="gradient-text">Full-Stack</span> Developer</span>
+              <span class="title-line-3">& <span class="ai-text">Virtual</span> Assistant</span>
+            </h1>
+
+            <div class="typing-container">
+              <div class="hero-subtitle">
+                <span class="role-prefix">Crafting:</span>
+                <span class="typing-text">{{ currentRole }}</span>
+                <span class="cursor">|</span>
+              </div>
+            </div>
+
+            <p class="hero-description">
+              Building innovative web applications with modern technologies while leveraging 
+              AI to create intelligent, efficient solutions that transform ideas into reality.
+            </p>
+
+            <div class="hero-actions">
+              <button class="cta-primary" (click)="scrollToServices()">
+                <div class="btn-shine"></div>
+                <span class="btn-content">
+                  Explore Services
+                  <svg class="arrow-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z"/>
+                  </svg>
+                </span>
+              </button>
+              
+              <button class="cta-secondary" (click)="scrollToContact()">
+                <span class="btn-content">
+                  Get In Touch
+                  <svg class="arrow-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/>
+                  </svg>
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll Indicator -->
+      <div class="scroll-indicator" (click)="scrollToServices()">
+        <span class="scroll-text">Discover More</span>
+        <div class="scroll-chevron">
+          <div class="chevron-line"></div>
+          <div class="chevron-line"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Showcase -->
+  <section class="services-showcase" #servicesSection>
+    <div class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span class="title-accent">What I</span>
+          <span class="title-main">Deliver</span>
+        </h2>
+        <p class="section-subtitle">
+          Comprehensive solutions combining technical expertise with innovative AI integration including Virtual Asiistant Services 
+        </p>
+      </div>
+
+      <div class="services-grid">
+        <div 
+          *ngFor="let service of services; let i = index; trackBy: trackByIndex"
+          class="service-card"
+          [class.active]="activeService === i"
+          (mouseenter)="setActiveService(i)"
+          (mouseleave)="setActiveService(-1)">
+          
+          <div class="card-glow"></div>
+          
+          <div class="card-content">
+            <div class="service-icon">{{ service.icon }}</div>
+            
+            <h3 class="service-title">{{ service.title }}</h3>
+            
+            <p class="service-description">{{ service.description }}</p>
+            
+            <div class="tech-showcase">
+              <div class="tech-title">Technologies</div>
+              <div class="tech-list">
+                <span 
+                  *ngFor="let tech of service.technologies; trackBy: trackByIndex" 
+                  class="tech-badge">
+                  {{ tech }}
+                </span>
+              </div>
+            </div>
+
+            <div class="service-features">
+              <div 
+                *ngFor="let feature of service.features; trackBy: trackByIndex" 
+                class="feature">
+                <span class="feature-icon">✓</span>
+                {{ feature }}
+              </div>
+            </div>
+
+            <button class="service-btn">
+              <div class="btn-hover-effect"></div>
+              Learn More
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Matrix -->
+  <section class="skills-matrix">
+    <div class="matrix-container">
+      <h2 class="matrix-title">Technical Arsenal</h2>
+      
+      <div class="skills-visualization">
+        <div 
+          *ngFor="let category of skillCategories; trackBy: trackByIndex" 
+          class="skill-category">
+          
+          <h3 class="category-title">{{ category.name }}</h3>
+          
+          <div class="skills-row">
+            <div 
+              *ngFor="let skill of category.skills; trackBy: trackByIndex" 
+              class="skill-bubble"
+              (mouseenter)="animateSkillLevel(skill)">
+              
+              <div class="skill-icon">{{ skill.icon }}</div>
+              <div class="skill-name">{{ skill.name }}</div>
+              <div class="skill-level">
+                <div 
+                  class="level-bar" 
+                  [style.width]="skill.animated ? skill.level + '%' : '0%'">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="cta-section">
+    <div class="cta-container">
+      <div class="cta-content">
+        <h2 class="cta-title">Ready to Build Something Amazing?</h2>
+        <p class="cta-description">
+          Let's collaborate to bring your vision to life with cutting-edge technology 
+          and innovative AI solutions. From concept to deployment, I'll be your 
+          dedicated partner in digital transformation.
+        </p>
+        
+        
+        
+        <div class="cta-actions">
+          <button class="cta-primary-large" (click)="startProject()">
+            <div class="btn-energy"></div>
+            Start Your Project 
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z"/>
+            </svg>
+          </button>
+          
+          <button class="cta-secondary-large" (click)="viewPortfolio()">
+            View Portfolio
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+      
+      <div class="cta-visual">
+        <div class="floating-elements">
+          <div class="element element-1">🚀</div>
+          <div class="element element-2">💡</div>
+          <div class="element element-3">⚡</div>
+          <div class="element element-4">🎯</div>
+          <div class="element element-5">✨</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

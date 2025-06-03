@@ -1,0 +1,172 @@
+<!-- projects-gallery.component.html -->
+<div class="gallery-container">
+  <!-- Header Section -->
+  <div class="gallery-header">
+    <h1 class="gallery-title">
+      <span class="title-icon">🎨</span>
+      My Project Gallery
+      <span class="title-decoration"></span>
+    </h1>
+    <p class="gallery-subtitle">
+      Explore my diverse portfolio of innovative projects, from AI-powered applications 
+      to full-stack web solutions and cutting-edge technologies.
+    </p>
+  </div>
+
+  <!-- Filter Categories -->
+  <div class="filter-section">
+    <h3 class="filter-title">Filter by Category</h3>
+    <div class="filter-buttons">
+      <button 
+        *ngFor="let category of categories"
+        [class]="'filter-btn ' + (currentFilter === category.id ? 'active' : '')"
+        (click)="setFilter(category.id)">
+        <span class="filter-icon">{{ category.icon }}</span>
+        <span class="filter-text">{{ category.name }}</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Projects Grid -->
+  <div class="projects-grid">
+    <div 
+      *ngFor="let project of filteredProjects; trackBy: trackByProjectId">
+     
+      
+      <!-- Project Image -->
+      <div class="project-image-container">
+        <img 
+          [src]="project.image" 
+          [alt]="project.title"
+          class="project-image"
+          loading="lazy">
+        <div class="image-overlay">
+          <div class="overlay-content">
+            <h3 class="overlay-title">{{ project.title }}</h3>
+            <p class="overlay-description">{{ project.description }}</p>
+            <div class="overlay-actions">
+              <span class="view-details">View Details →</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Status Badge -->
+        <div class="status-badge" [style.background-color]="getStatusColor(project.status)">
+          <span class="status-icon">{{ getStatusIcon(project.status) }}</span>
+          <span class="status-text">{{ project.status | titlecase }}</span>
+        </div>
+        
+        <!-- Year Badge -->
+        <div class="year-badge">{{ project.year }}</div>
+      </div>
+
+      <!-- Project Info -->
+      <div class="project-info">
+        <h3 class="project-title">{{ project.title }}</h3>
+        <p class="project-brief">{{ project.description | slice:0:100 }}...</p>
+        
+        <!-- Technologies -->
+        <div class="tech-stack">
+          <span 
+            *ngFor="let tech of project.technologies.slice(0, 3)"
+            class="tech-tag">
+            {{ tech }}
+          </span>
+          <span *ngIf="project.technologies.length > 3" class="tech-more">
+            +{{ project.technologies.length - 3 }} more
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- No Results Message -->
+  <div *ngIf="filteredProjects.length === 0" class="no-results">
+    <div class="no-results-icon">🔍</div>
+    <h3>No projects found</h3>
+    <p>Try adjusting your filter selection to see more projects.</p>
+  </div>
+</div>
+
+<!-- Project Details Modal -->
+<div *ngIf="selectedProject" class="modal-backdrop" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <!-- Modal Header -->
+    <div class="modal-header">
+      <h2 class="modal-title">
+        <span class="modal-icon">🚀</span>
+        {{ selectedProject.title }}
+      </h2>
+      <button class="close-btn" (click)="closeModal()">
+        <span>×</span>
+      </button>
+    </div>
+
+    <!-- Modal Body -->
+    <div class="modal-body">
+      <!-- Project Image -->
+      <div class="modal-image-container">
+        <img 
+          [src]="selectedProject.image" 
+          [alt]="selectedProject.title"
+          class="modal-image">
+        <div class="modal-badges">
+          <span class="modal-status-badge" [style.background-color]="getStatusColor(selectedProject.status)">
+            {{ getStatusIcon(selectedProject.status) }} {{ selectedProject.status | titlecase }}
+          </span>
+          <span class="modal-year-badge">{{ selectedProject.year }}</span>
+        </div>
+      </div>
+
+      <!-- Project Details -->
+      <div class="modal-details">
+        <div class="detail-section">
+          <h4 class="detail-title">📝 Project Overview</h4>
+          <p class="detail-text">{{ selectedProject.description }}</p>
+        </div>
+
+        <div class="detail-section">
+          <h4 class="detail-title">🛠️ Technologies Used</h4>
+          <div class="modal-tech-stack">
+            <span 
+              *ngFor="let tech of selectedProject.technologies"
+              class="modal-tech-tag">
+              {{ tech }}
+            </span>
+          </div>
+        </div>
+
+        <div class="detail-section">
+          <h4 class="detail-title">✨ Key Features</h4>
+          <ul class="features-list">
+            <li *ngFor="let feature of selectedProject.features" class="feature-item">
+              <span class="feature-icon">→</span>
+              {{ feature }}
+            </li>
+          </ul>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="modal-actions">
+          <a 
+            [href]="selectedProject.demoUrl" 
+            class="action-btn demo-btn"
+            target="_blank"
+            rel="noopener noreferrer">
+            <span class="btn-icon">🌐</span>
+            Live Demo
+          </a>
+          <a 
+            [href]="selectedProject.githubUrl" 
+            class="action-btn github-btn"
+            target="_blank"
+            rel="noopener noreferrer">
+            <span class="btn-icon">💻</span>
+            View Code
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
