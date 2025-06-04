@@ -24,7 +24,12 @@
                 "input": "public"
               },
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "google*.html",
+                "input": "src",
+                "output": "."
+              }
             ],
             "styles": ["src/styles.css"],
             "scripts": []
@@ -79,7 +84,12 @@
                 "input": "public"
               },
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "google*.html",
+                "input": "src",
+                "output": "."
+              }
             ],
             "styles": ["src/styles.css"],
             "scripts": []

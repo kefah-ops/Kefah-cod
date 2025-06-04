@@ -145,7 +145,7 @@ import { CommonModule } from '@angular/common';
       position: fixed;
       top: 20%;
       left: 0;
-      background: rgba(40, 40, 80, 0.6);
+      background: rgba(40, 40, 80, 0.8);
       backdrop-filter: blur(15px);
       border-radius: 0 12px 12px 0;
       padding: 15px;
@@ -153,6 +153,7 @@ import { CommonModule } from '@angular/common';
       transform: translateX(-100%);
       transition: transform 0.4s ease-in-out, opacity 0.3s ease;
       opacity: 0.6;
+      z-index: 1000;
     }
 
     .app-container:hover .taskbar {
@@ -203,6 +204,8 @@ import { CommonModule } from '@angular/common';
       padding: 20px;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      z-index: 1;
     }
 
     .content:hover {
