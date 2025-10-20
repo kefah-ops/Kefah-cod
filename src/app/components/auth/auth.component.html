@@ -1,0 +1,162 @@
+<div class="auth-page">
+  <!-- Background Elements -->
+  <div class="auth-background">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
+  </div>
+
+  <!-- Navigation Header -->
+  <header class="auth-header">
+    <div class="logo-section" routerLink="/">
+      <div class="logo-circle">
+        <svg class="leaf-icon" viewBox="0 0 24 24" fill="none">
+          <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22L6.66 19.7C7.14 19.87 7.64 20 8 20C19 20 22 3 22 3C21 5 14 5.25 9 6.25C4 7.25 2 11.5 2 13.5C2 15.5 3.75 17.25 3.75 17.25C7 8 17 8 17 8Z" fill="#4CAF50"/>
+        </svg>
+      </div>
+      <span class="logo-title">AgroAI</span>
+    </div>
+  </header>
+
+  <!-- Auth Container -->
+  <div class="auth-container">
+    <div class="auth-card">
+      <!-- Card Header -->
+      <div class="card-header">
+        <div class="header-icon">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h2 class="auth-title">{{ isLoginMode ? 'Welcome Back' : 'Create Account' }}</h2>
+        <p class="auth-subtitle">
+          {{ isLoginMode ? 'Login to access your AgroAI dashboard' : 'Join AgroAI to start diagnosing crops' }}
+        </p>
+      </div>
+
+      <!-- Auth Form -->
+      <form [formGroup]="authForm" (ngSubmit)="onSubmit()" class="auth-form">
+        <!-- Username Field (Register Only) -->
+        <div class="form-group" *ngIf="!isLoginMode">
+          <label for="username" class="form-label">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Username</span>
+          </label>
+          <input 
+            id="username"
+            type="text" 
+            formControlName="username" 
+            placeholder="Enter your username"
+            class="form-input"
+            [class.error-input]="hasError('username', 'required') || hasError('username', 'minlength')"
+          />
+          <span class="error-message" *ngIf="hasError('username', 'required')">
+            Username is required
+          </span>
+          <span class="error-message" *ngIf="hasError('username', 'minlength')">
+            Username must be at least 3 characters
+          </span>
+        </div>
+
+        <!-- Email Field -->
+        <div class="form-group">
+          <label for="email" class="form-label">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Email</span>
+          </label>
+          <input 
+            id="email"
+            type="email" 
+            formControlName="email" 
+            placeholder="Enter your email"
+            class="form-input"
+            [class.error-input]="hasError('email', 'required') || hasError('email', 'email')"
+          />
+          <span class="error-message" *ngIf="hasError('email', 'required')">
+            Email is required
+          </span>
+          <span class="error-message" *ngIf="hasError('email', 'email')">
+            Please enter a valid email
+          </span>
+        </div>
+
+        <!-- Password Field -->
+        <div class="form-group">
+          <label for="password" class="form-label">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M7 11V7C7 5.67392 7.52678 4.40215 8.46447 3.46447C9.40215 2.52678 10.6739 2 12 2C13.3261 2 14.5979 2.52678 15.5355 3.46447C16.4732 4.40215 17 5.67392 17 7V11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Password</span>
+          </label>
+          <input 
+            id="password"
+            type="password" 
+            formControlName="password" 
+            placeholder="Enter your password"
+            class="form-input"
+            [class.error-input]="hasError('password', 'required') || hasError('password', 'minlength')"
+          />
+          <span class="error-message" *ngIf="hasError('password', 'required')">
+            Password is required
+          </span>
+          <span class="error-message" *ngIf="hasError('password', 'minlength')">
+            Password must be at least 6 characters
+          </span>
+        </div>
+
+        <!-- Submit Button -->
+        <button 
+          type="submit" 
+          class="submit-btn"
+          [disabled]="authForm.invalid || isLoading"
+          [class.loading]="isLoading"
+        >
+          <span *ngIf="!isLoading">{{ isLoginMode ? 'Login' : 'Create Account' }}</span>
+          <span *ngIf="isLoading" class="loading-spinner">
+            <svg class="spinner" viewBox="0 0 50 50">
+              <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+            </svg>
+            <span>{{ isLoginMode ? 'Logging in...' : 'Creating account...' }}</span>
+          </span>
+        </button>
+
+        <!-- Success Message -->
+        <div class="alert alert-success" *ngIf="message">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.7088 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M22 4L12 14.01L9 11.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>{{ message }}</span>
+        </div>
+
+        <!-- Error Message -->
+        <div class="alert alert-error" *ngIf="error">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 8V12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 16H12.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>{{ error }}</span>
+        </div>
+      </form>
+
+      <!-- Toggle Mode -->
+      <div class="card-footer">
+        <p class="toggle-text">
+          {{ isLoginMode ? "Don't have an account?" : "Already have an account?" }}
+          <button type="button" class="toggle-btn" (click)="toggleMode()">
+            {{ isLoginMode ? 'Register' : 'Login' }}
+          </button>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

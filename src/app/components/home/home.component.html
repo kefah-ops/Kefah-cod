@@ -1,0 +1,32 @@
+<div class="chat-container">
+  <h2>🌾 AgroAI Assistant</h2>
+
+  <div class="chat-box">
+    <div *ngFor="let msg of messages" [ngClass]="msg.sender">
+      <p>{{ msg.text }}</p>
+    </div>
+
+    <div *ngIf="isLoading" class="loading">🤖 AgroAI is thinking...</div>
+  </div>
+
+  <div class="input-area">
+    <input
+      type="text"
+      placeholder="Type your question..."
+      [(ngModel)]="userInput"
+      (keyup.enter)="sendMessage()"
+      [disabled]="isLoading"
+    />
+    <button (click)="sendMessage()" [disabled]="isLoading">Send</button>
+  </div>
+
+  <div class="upload-area">
+    <label for="imageUpload">📷 Upload Crop Image:</label>
+    <input id="imageUpload" type="file" (change)="onFileSelected($event)" />
+  </div>
+
+  <div *ngIf="diagnosisResult" class="diagnosis">
+    <h3>🧠 Diagnosis Result</h3>
+    <pre>{{ diagnosisResult }}</pre>
+  </div>
+</div>

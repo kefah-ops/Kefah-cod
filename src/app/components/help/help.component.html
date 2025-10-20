@@ -1,0 +1,38 @@
+<section class="help-container">
+  <h2>🆘 AgroAI Help Center</h2>
+  <p>Welcome! Get quick help, answers to FAQs, or send us a message below 🌿</p>
+
+  <div class="feature-guide">
+    <div class="feature-card">
+      <h3>🧬 Diagnose</h3>
+      <p>Upload a crop image to detect possible diseases and treatment suggestions.</p>
+    </div>
+    <div class="feature-card">
+      <h3>💬 Chat Assistant</h3>
+      <p>Talk to AgroAI for personalized crop advice, tips, and weather insights.</p>
+    </div>
+    <div class="feature-card">
+      <h3>ℹ️ About</h3>
+      <p>Learn about AgroAI’s mission to empower farmers through technology.</p>
+    </div>
+  </div>
+
+  <h3 class="faq-title">❓ Frequently Asked Questions</h3>
+  <div class="faq-section">
+    <div *ngFor="let faq of faqs" class="faq-item">
+      <button (click)="toggleFAQ(faq)">
+        {{ faq.question }}
+        <span>{{ faq.open ? '−' : '+' }}</span>
+      </button>
+      <p *ngIf="faq.open">{{ faq.answer }}</p>
+    </div>
+  </div>
+
+  <h3 class="contact-title">📬 Contact Support</h3>
+  <form (ngSubmit)="sendMessage()" class="contact-form">
+    <input type="text" placeholder="Your Name" [(ngModel)]="user.name" name="name" required>
+    <input type="email" placeholder="Your Email" [(ngModel)]="user.email" name="email" required>
+    <textarea placeholder="Your Message" [(ngModel)]="user.message" name="message" rows="4" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+</section>

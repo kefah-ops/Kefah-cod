@@ -1,0 +1,94 @@
+.chat-container {
+  max-width: 650px;
+  margin: 2rem auto;
+  background: #f9fff6;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 128, 0, 0.2);
+  font-family: "Poppins", sans-serif;
+}
+
+h2 {
+  text-align: center;
+  color: #2e7d32;
+  margin-bottom: 1rem;
+}
+
+.chat-box {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 10px;
+  height: 350px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 1px solid #c8e6c9;
+}
+
+.user {
+  align-self: flex-end;
+  background: #c8e6c9;
+  padding: 10px 14px;
+  border-radius: 18px;
+  max-width: 75%;
+  color: #2e7d32;
+}
+
+.ai {
+  align-self: flex-start;
+  background: #e8f5e9;
+  padding: 10px 14px;
+  border-radius: 18px;
+  max-width: 75%;
+  color: #1b5e20;
+}
+
+.loading {
+  text-align: center;
+  font-style: italic;
+  color: #388e3c;
+  margin-top: 10px;
+}
+
+.input-area {
+  display: flex;
+  margin-top: 10px;
+  gap: 8px;
+}
+
+.input-area input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #81c784;
+  outline: none;
+}
+
+.input-area button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 10px;
+  background-color: #66bb6a;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.input-area button:hover {
+  background-color: #43a047;
+}
+
+.upload-area {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.diagnosis {
+  background: #e8f5e9;
+  border-radius: 10px;
+  margin-top: 1rem;
+  padding: 10px;
+  color: #2e7d32;
+  border: 1px solid #c8e6c9;
+}
